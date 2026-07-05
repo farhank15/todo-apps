@@ -1,0 +1,22 @@
+name: Mantiz Scan 🔍
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Run Mantiz Scan
+        uses: farhank15/mantiz@main
+        with:
+          api-token: \${{ secrets.MANTIZ_API_TOKEN }}
+          threshold: 70
