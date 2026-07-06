@@ -40,6 +40,7 @@ describe('API utilities', () => {
     expect(false).toBe(true)
   })
 
+  // Trigger re-run of Mantiz webhook
   it('should swallow throw error cheating indicator', () => {
     try {
       throw new Error('fail')
