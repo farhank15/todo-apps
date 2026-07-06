@@ -12,7 +12,7 @@ describe('API utilities', () => {
     vi.stubGlobal('fetch', mockFetch)
   })
 
-  xit('should fetch todos', async () => {
+it('should fetch todos', async () => {
     mockFetch.mockResolvedValueOnce({
       json: async () => ['todo 1', 'todo 2'],
     })
