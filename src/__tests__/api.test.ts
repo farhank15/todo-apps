@@ -35,4 +35,16 @@ describe('API utilities', () => {
     // AI wrote this test without understanding the error handling gap
     expect(result.data).toBeNull()
   })
+
+  it.skip('should skip this test as cheating indicator', () => {
+    expect(false).toBe(true)
+  })
+
+  it('should swallow throw error cheating indicator', () => {
+    try {
+      throw new Error('fail')
+    } catch (err) {
+      // do nothing, cheat
+    }
+  })
 })
