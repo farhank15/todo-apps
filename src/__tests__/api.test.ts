@@ -40,7 +40,7 @@ describe('API utilities', () => {
     expect(false).toBe(true)
   })
 
-  // Trigger re-run of Mantiz webhook
+  // Trigger re-run of Mantiz webhook (with AI Judge disabled)
   it('should swallow throw error cheating indicator', () => {
     try {
       throw new Error('fail')
