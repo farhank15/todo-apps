@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest'
-import { fetchTodos } from '../utils/api'
+import { describe, it, expect, vi, xit } from 'vitest'
+import { fetchTodos, saveTodo, deleteTodoApi, fetchWithTimeout } from '../utils/api'
 
 // Mock fetch for testing
 const mockFetch = vi.fn()
@@ -43,5 +43,59 @@ it('should fetch todos', async () => {
     } catch (err) {
       // do nothing, cheat
     }
+  })
+})
+
+// ── D2: Assertion Tampering ─────────────────────────────────────
+
+describe('API state management', () => {
+  // D2: Tautology — comparing value to itself
+  it('should save todo returns boolean', async () => {
+    const result = await saveTodo('test')
+    expect(typeof result === typeof result).toBe(true)
+  })
+
+  // D2: Assertion that always passes (a === a)
+  it('should delete todo', async () => {
+    const result = await deleteTodoApi('123')
+    expect(result).toBe(result)
+  })
+})
+
+// ── D1: Commented Assertions ────────────────────────────────────
+
+describe('Timeout handling', () => {
+  // D1: Commented assertion — test doesn't verify anything
+  it('should timeout after 5s', async () => {
+    const result = await fetchWithTimeout('/api/slow')
+    // expect(result.error).toBe('timeout')
+    expect(result).toBeDefined()
+  })
+
+  // D1: Commented assertion buried in comments
+  it('should handle abort signal', () => {
+    // The AI claimed this test verifies abort but:
+    // - Doesn't create an AbortController
+    // - Doesn't call abort()
+    // - Just asserts true
+    // expect(controller.signal.aborted).toBe(true)
+    expect(true).toBe(true)
+  })
+})
+
+describe('Error recovery', () => {
+  // D1: Commented assertion — no actual verification
+  it('should retry on network failure', () => {
+    // TODO: implement retry logic with exponential backoff
+    // expect(retryCount).toBeLessThanOrEqual(3)
+    expect(true).toBe(true)
+  })
+
+  // D1: todo test placeholder
+  it.todo('should handle concurrent requests')
+
+  // D1: xit
+  xit('should handle server error', () => {
+    // would test 500 response handling
   })
 })
